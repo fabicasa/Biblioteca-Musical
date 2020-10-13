@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistaController;
 use App\Http\Controllers\CancionController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,16 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::post('/search', [HomeController::class, 'search'])->name('home.search');
 Route::get('/hola',[ArtistaController::class, 'prueba']);
 Route::get('/guardar',[ArtistaController::class, 'guardarDatos']);
 
 Auth::routes();
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get ('/artistas',[ArtistaController::class,'index']);
 Route::get('/artistas/create',[ArtistaController::class,'create']);
 Route::post('/artistas',[ArtistaController::class,'store'])->name('artistaStore');
